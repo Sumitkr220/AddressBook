@@ -6,24 +6,24 @@ namespace AddressBook
 {
     class AddressBook
     {
-		private LinkedList<ContactDetails> addBook;
+		public List<ContactDetails> addBook;
         public AddressBook()
         {
-			this.addBook = new LinkedList<ContactDetails>();
+			this.addBook = new List<ContactDetails>();
         }
-		public void setAddressBookBuilder(LinkedList<ContactDetails> contact)
+		public void setAddressBook(List<ContactDetails> contact)
 		{
 			this.addBook = contact;
 		}
-		public LinkedList<ContactDetails> getAddressBook()
+		public List<ContactDetails> getAddressBook()
 		{
 			return this.addBook;
 		}
 		public void addContact(ContactDetails contactObj)
 		{
-			addBook.AddLast(contactObj);
+			addBook.Add(contactObj);
 		}
-		public LinkedList<ContactDetails> showContact()
+		public List<ContactDetails> showContact()
 		{
 			return addBook;
 		}
