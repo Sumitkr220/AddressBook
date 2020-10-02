@@ -27,5 +27,21 @@ namespace AddressBook
 		{
 			return addBook;
 		}
+		public string updateContact(ContactDetails contact1,ContactDetails contact2)
+        {
+			    int count = 0;
+				if(contact2.firstName.Equals(contact1.firstName))
+                {
+					addBook.Remove(contact2);
+					addBook.Add(contact1);
+					count++;
+                }
+			if (count == 0)
+			{
+				return "no";
+			}
+			else
+				return "yes";
+        }
 	}
 }
