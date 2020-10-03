@@ -4,44 +4,61 @@ using System.Text;
 
 namespace AddressBook
 {
-    class AddressBook
-    {
-		public List<ContactDetails> addBook;
-        public AddressBook()
-        {
-			this.addBook = new List<ContactDetails>();
-        }
-		public void setAddressBook(List<ContactDetails> contact)
+	class AddressBook
+	{
+		public Dictionary<string,ContactDetails> addBook;
+		public AddressBook()
+		{
+			this.addBook = new Dictionary<string, ContactDetails>();
+		}
+		public void setAddressBook(Dictionary<string, ContactDetails> contact)
 		{
 			this.addBook = contact;
 		}
-		public List<ContactDetails> getAddressBook()
+		public Dictionary<string, ContactDetails> getAddressBook()
 		{
 			return this.addBook;
 		}
-		public void addContact(ContactDetails contactObj)
+		public void AddContact(string firstName, ContactDetails contactObj)
 		{
-			addBook.Add(contactObj);
+			addBook.Add(firstName, contactObj);
 		}
-		public List<ContactDetails> showContact()
+		public Dictionary<string, ContactDetails> ShowContact()
 		{
 			return addBook;
 		}
-		public string updateContact(ContactDetails contact1,ContactDetails contact2)
-        {
-			    int count = 0;
-				if(contact2.firstName.Equals(contact1.firstName))
-                {
-					addBook.Remove(contact2);
-					addBook.Add(contact1);
+		public string updateContact(string firstName,ContactDetails contact)
+		{
+			int count = 0;
+			foreach (KeyValuePair<string, ContactDetails> item in addBook)
+			{
+				if (item.Key.Equals(firstName))
+				{
+					addBook.Remove(item.Key);
 					count++;
-                }
+				}
+			}
 			if (count == 0)
 			{
 				return "no";
 			}
 			else
+			{
+				addBook.Add(firstName, contact);
 				return "yes";
-        }
+			}
+			}
+		public bool RemoveContact(String firstName)
+		{
+			ContactDetails contact = new ContactDetails("", "", "", "", "", "", "", "");
+			foreach (KeyValuePair<string, ContactDetails> item in addBook)
+			{
+				if (item.Key.Equals(firstName))
+				{
+					contact = item.Value;
+				}
+			}
+			return addBook.Remove(firstName);
+		}
 	}
 }

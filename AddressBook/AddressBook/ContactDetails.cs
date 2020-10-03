@@ -25,7 +25,7 @@ namespace AddressBook
 			this.phone = phone;
 			this.email = email;
 		}
-	public String toString()
+    	public String toString()
 		{
 			return "First Name: " + firstName + "\nLast Name: " + lastName + "\nAddress: " + address + "\nCity: " + city + "\nState: " + state + "\nZip: " + zipcode + "\nPhone Number: " + phone + "\nEmail: " + email;
 		}
