@@ -78,7 +78,7 @@ namespace AddressBook
 						}
 						else
                         {
-							Console.WriteLine("No name there to update");
+							Console.WriteLine("Name not found");
                         }
 						break;
 					case 3:
