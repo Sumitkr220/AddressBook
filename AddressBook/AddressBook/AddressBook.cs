@@ -21,7 +21,15 @@ namespace AddressBook
 		}
 		public void AddContact(string firstName, ContactDetails contactObj)
 		{
-			addBook.Add(firstName, contactObj);
+			try
+			{
+				addBook.Add(firstName, contactObj);
+			}
+			catch
+            {
+                Console.WriteLine("Can not add duplicate name");
+            }
+
 		}
 		public Dictionary<string, ContactDetails> ShowContact()
 		{
@@ -48,7 +56,7 @@ namespace AddressBook
 				return "yes";
 			}
 			}
-		public bool RemoveContact(String firstName)
+		public bool RemoveContact(string firstName)
 		{
 			ContactDetails contact = new ContactDetails("", "", "", "", "", "", "", "");
 			foreach (KeyValuePair<string, ContactDetails> item in addBook)

@@ -43,30 +43,43 @@ namespace AddressBook
 						Console.WriteLine("Update contact: Enter name and all the details to update");
 						Console.WriteLine("Enter first name: ");
 						firstName = Console.ReadLine();
-						Console.WriteLine("Enter last name: ");
-						lastName = Console.ReadLine();
-						Console.WriteLine("Enter address: ");
-						address = Console.ReadLine();
-						Console.WriteLine("Enter city: ");
-						city = Console.ReadLine();
-						Console.WriteLine("Enter state: ");
-						state = Console.ReadLine();
-						Console.WriteLine("Enter zip: ");
-						zipcode = Console.ReadLine();
-						Console.WriteLine("Enter phone number: ");
-						phone = Console.ReadLine();
-						Console.WriteLine("Enter email: ");
-						email = Console.ReadLine();
-						ContactDetails contact1 = new ContactDetails(firstName, lastName, address, city, state, zipcode, phone, email);
-						string check = addressBook.updateContact(firstName, contact1);
-						if (check.Equals("yes"))
+						Dictionary<string, ContactDetails> ContDet = new Dictionary<string, ContactDetails>();
+						ContDet = addressBook.ShowContact();
+						int flag = 0;
+						foreach(KeyValuePair<string, ContactDetails> item in ContDet)
+                        {
+							if(item.Value.firstName.Equals(firstName))
+                            {
+								flag++;
+                            }
+                        }
+						if (flag != 0)
 						{
-							Console.WriteLine("Update Successfully");
+							Console.WriteLine("Enter last name: ");
+							lastName = Console.ReadLine();
+							Console.WriteLine("Enter address: ");
+							address = Console.ReadLine();
+							Console.WriteLine("Enter city: ");
+							city = Console.ReadLine();
+							Console.WriteLine("Enter state: ");
+							state = Console.ReadLine();
+							Console.WriteLine("Enter zip: ");
+							zipcode = Console.ReadLine();
+							Console.WriteLine("Enter phone number: ");
+							phone = Console.ReadLine();
+							Console.WriteLine("Enter email: ");
+							email = Console.ReadLine();
+							ContactDetails contact1 = new ContactDetails(firstName, lastName, address, city, state, zipcode, phone, email);
+							string check = addressBook.updateContact(firstName, contact1);
+							if (check.Equals("yes"))
+							{
+								Console.WriteLine("Update Successfully");
+							}
 						}
 						else
-						{
-							Console.WriteLine("No contact to update");
-						}
+                        {
+							Console.WriteLine("No name there to update");
+                        }
 						break;
 					case 3:
                         Console.WriteLine("Enter first name of contact to remove:");
