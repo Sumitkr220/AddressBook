@@ -11,48 +11,33 @@ namespace AddressBook
 		{
 			string firstName, lastName, address, city, state, zipcode, phone, email;
 			AddressBook addressBook = new AddressBook();
-            int count;
-            do
+			int count;
+			do
 			{
-				Console.WriteLine("Menu \nPress 1 to Add a contact \nPress 2 to Edit a Contact \nPress 3 to Remove a contact \nPress 4 to View all contact \nPress 5 to Exit");
+				Console.WriteLine("Menu \nPress 1 to Add a contact \nPress 2 to Edit a Contact \nPress 3 to Remove a contact \nPress 4 to View all contact \nPress 6 to find person in city \nPress 7 to find person in state \nPress  to Exit");
 				count = Convert.ToInt32(Console.ReadLine());
 				switch (count)
 				{
 					case 1:
 						Console.WriteLine("Welome to Address Book!!!");
 						Console.WriteLine("Enter first name: ");
-                        firstName = Console.ReadLine();
-						Dictionary<string, ContactDetails> ContDe = new Dictionary<string, ContactDetails>();
-						ContDe = addressBook.ShowContact();
-						int fla = 0;
-						foreach (KeyValuePair<string, ContactDetails> item in ContDe)
-						{
-							if (item.Value.firstName.Equals(firstName))
-							{
-								fla++;
-							}
-						}
-						if (fla == 0)
-						{
-							Console.WriteLine("Enter last name: ");
-							lastName = Console.ReadLine();
-							Console.WriteLine("Enter address: ");
-							address = Console.ReadLine();
-							Console.WriteLine("Enter city: ");
-							city = Console.ReadLine();
-							Console.WriteLine("Enter state: ");
-							state = Console.ReadLine();
-							Console.WriteLine("Enter zip: ");
-							zipcode = Console.ReadLine();
-							Console.WriteLine("Enter phone number: ");
-							phone = Console.ReadLine();
-							Console.WriteLine("Enter email: ");
-							email = Console.ReadLine();
-							ContactDetails contact = new ContactDetails(firstName, lastName, address, city, state, zipcode, phone, email);
-							addressBook.AddContact(firstName, contact);
-						}
-						else
-                            Console.WriteLine("The Name is duplicate");
+						firstName = Console.ReadLine();
+						Console.WriteLine("Enter last name: ");
+						lastName = Console.ReadLine();
+						Console.WriteLine("Enter address: ");
+						address = Console.ReadLine();
+						Console.WriteLine("Enter city: ");
+						city = Console.ReadLine();
+						Console.WriteLine("Enter state: ");
+						state = Console.ReadLine();
+						Console.WriteLine("Enter zip: ");
+						zipcode = Console.ReadLine();
+						Console.WriteLine("Enter phone number: ");
+						phone = Console.ReadLine();
+						Console.WriteLine("Enter email: ");
+						email = Console.ReadLine();
+						ContactDetails contact = new ContactDetails(firstName, lastName, address, city, state, zipcode, phone, email);
+						addressBook.AddContact(firstName, contact);
 						break;
 					case 2:
 						Console.WriteLine("Update contact: Enter name and all the details to update");
@@ -61,13 +46,13 @@ namespace AddressBook
 						Dictionary<string, ContactDetails> ContDet = new Dictionary<string, ContactDetails>();
 						ContDet = addressBook.ShowContact();
 						int flag = 0;
-						foreach(KeyValuePair<string, ContactDetails> item in ContDet)
-                        {
-							if(item.Value.firstName.Equals(firstName))
-                            {
+						foreach (KeyValuePair<string, ContactDetails> item in ContDet)
+						{
+							if (item.Value.firstName.Equals(firstName))
+							{
 								flag++;
-                            }
-                        }
+							}
+						}
 						if (flag != 0)
 						{
 							Console.WriteLine("Enter last name: ");
@@ -92,17 +77,17 @@ namespace AddressBook
 							}
 						}
 						else
-                        {
+						{
 							Console.WriteLine("Name not found");
-                        }
+						}
 						break;
 					case 3:
-                        Console.WriteLine("Enter first name of contact to remove:");
-					    string fname=Console.ReadLine();
+						Console.WriteLine("Enter first name of contact to remove:");
+						string fname = Console.ReadLine();
 						bool b = addressBook.RemoveContact(fname);
 						if (b)
 							Console.WriteLine("Contact removed");
-			         	else
+						else
 							Console.WriteLine("Contact not found");
 						break;
 					case 4:
@@ -113,12 +98,27 @@ namespace AddressBook
 							Console.WriteLine(item.Value.toString());
 						}
 						break;
-					case 5: break;
+                    case 5:
+                        Console.WriteLine("Enter the city : ");
+                        String city2 = Console.ReadLine();
+                        List<string> cont= addressBook.searchContactByCity(city2);
+                        foreach(var element in cont)
+                        {
+                            Console.WriteLine(element);
+                        }
+                        break;
+                    case 6:
+                        Console.WriteLine("Enter the state : ");
+                        String state2 = Console.ReadLine();
+						List<string> cont1 = addressBook.searchContactByCity(state2);
+						foreach (var element in cont1)
+						{
+							Console.WriteLine(element);
+						}
+						break;
+					default: break;
 				}
 			} while (count != 5);
 		}
 	}
 }
-	
-
-
