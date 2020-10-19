@@ -118,7 +118,7 @@ namespace AddressBook
 						break;
 					default: break;
 				}
-			} while (count != 5);
+			} while (count != 7);
 		}
 	}
 }
