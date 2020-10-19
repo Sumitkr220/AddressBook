@@ -22,22 +22,37 @@ namespace AddressBook
 						Console.WriteLine("Welome to Address Book!!!");
 						Console.WriteLine("Enter first name: ");
                         firstName = Console.ReadLine();
-						Console.WriteLine("Enter last name: ");
-						lastName = Console.ReadLine();
-						Console.WriteLine("Enter address: ");
-						address = Console.ReadLine();
-						Console.WriteLine("Enter city: ");
-						city = Console.ReadLine();
-						Console.WriteLine("Enter state: ");
-						state = Console.ReadLine();
-						Console.WriteLine("Enter zip: ");
-						zipcode = Console.ReadLine();
-						Console.WriteLine("Enter phone number: ");
-						phone = Console.ReadLine();
-						Console.WriteLine("Enter email: ");
-						email = Console.ReadLine();
-						ContactDetails contact = new ContactDetails(firstName, lastName, address, city, state, zipcode, phone, email);
-						addressBook.AddContact(firstName, contact);
+						Dictionary<string, ContactDetails> ContDe = new Dictionary<string, ContactDetails>();
+						ContDe = addressBook.ShowContact();
+						int fla = 0;
+						foreach (KeyValuePair<string, ContactDetails> item in ContDe)
+						{
+							if (item.Value.firstName.Equals(firstName))
+							{
+								fla++;
+							}
+						}
+						if (fla == 0)
+						{
+							Console.WriteLine("Enter last name: ");
+							lastName = Console.ReadLine();
+							Console.WriteLine("Enter address: ");
+							address = Console.ReadLine();
+							Console.WriteLine("Enter city: ");
+							city = Console.ReadLine();
+							Console.WriteLine("Enter state: ");
+							state = Console.ReadLine();
+							Console.WriteLine("Enter zip: ");
+							zipcode = Console.ReadLine();
+							Console.WriteLine("Enter phone number: ");
+							phone = Console.ReadLine();
+							Console.WriteLine("Enter email: ");
+							email = Console.ReadLine();
+							ContactDetails contact = new ContactDetails(firstName, lastName, address, city, state, zipcode, phone, email);
+							addressBook.AddContact(firstName, contact);
+						}
+						else
+                            Console.WriteLine("The Name is duplicate");
 						break;
 					case 2:
 						Console.WriteLine("Update contact: Enter name and all the details to update");
