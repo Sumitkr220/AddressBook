@@ -9,7 +9,7 @@ namespace AddressBook
 	{
 		public Dictionary<string, ContactDetails> addBook;
 		public List<ContactDetails> addContact;
-
+		public int countByCity;
 		public AddressBook()
 		{
 			this.addBook = new Dictionary<string, ContactDetails>();
@@ -23,6 +23,14 @@ namespace AddressBook
 		{
 			return this.addBook;
 		}
+		public void setCountByCity(int countByCity)
+        {
+			this.countByCity = countByCity;
+        }
+		public int getCountByCity()
+        {
+			return this.countByCity;
+        }
 		public void AddContact(string firstName, ContactDetails contactObj)
 		{
 			try
@@ -80,20 +88,27 @@ namespace AddressBook
 
 		public List<String> searchContactByCity(string city)
 		{
+			int count = 0;
 			List<String> list = new List<string>();
 			foreach (ContactDetails contact in addContact.FindAll(e => (e.city.Equals(city))).ToList())
 			{
 				list.Add(contact.firstName);
+				count++;
 			}
+			this.countByCity = count;
+            Console.WriteLine("No of contact found in city is : "+countByCity);
 			return list;
 		}
 		public List<String> searchContactByState(string state)
 		{
+			int count = 0;
 			List<String> list = new List<string>();
-			foreach (ContactDetails contact in addContact.FindAll(e => (e.city.Equals(state))).ToList())
+			foreach (ContactDetails contact in addContact.FindAll(e => (e.state.Equals(state))).ToList())
 			{
 				list.Add(contact.firstName);
+				count++;
 			}
+			Console.WriteLine("No of contact found in state is : " + count);
 			return list;
 		}
 	}

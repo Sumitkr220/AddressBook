@@ -14,7 +14,7 @@ namespace AddressBook
 			int count;
 			do
 			{
-				Console.WriteLine("Menu \nPress 1 to Add a contact \nPress 2 to Edit a Contact \nPress 3 to Remove a contact \nPress 4 to View all contact \nPress 6 to find person in city \nPress 7 to find person in state \nPress  to Exit");
+				Console.WriteLine("Menu \nPress 1 to Add a contact \nPress 2 to Edit a Contact \nPress 3 to Remove a contact \nPress 4 to View all contact \nPress 5 to find person in city \nPress 6 to find person in state \nPress 7 to Exit");
 				count = Convert.ToInt32(Console.ReadLine());
 				switch (count)
 				{
@@ -110,7 +110,7 @@ namespace AddressBook
                     case 6:
                         Console.WriteLine("Enter the state : ");
                         String state2 = Console.ReadLine();
-						List<string> cont1 = addressBook.searchContactByCity(state2);
+						List<string> cont1 = addressBook.searchContactByState(state2);
 						foreach (var element in cont1)
 						{
 							Console.WriteLine(element);
