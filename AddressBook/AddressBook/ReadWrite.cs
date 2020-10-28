@@ -12,7 +12,7 @@ namespace AddressBook
     {
         public static void ReadFromStreamReader()
         {
-            string path = @"C:\Users\Administrator\Desktop\BridgeLabz Practice\23. AddressBook\AddressBook\AddressBookSystem\Utility\Contacts.txt";
+            string path = @"C:\Users\sumit\Desktop\AddressBook\AddressBook\AddressBook\AddressBook\Utility\Contacts.txt";
             if (File.Exists(path))
             {
                 using (StreamReader sr = File.OpenText(path))
