@@ -21,7 +21,7 @@ namespace AddressBook
                 int loop = 1;
                 while (loop == 1)
                 {
-                    Console.WriteLine("\nSelect the option. \n1. Add new contact. \n2. Edit existing contact.\n3. Delete Contact \n4. Search By City \n5. Count citywise contacts \n6. Display Alphabetically \n7. Exit.");
+                    Console.WriteLine("\nSelect the option. \n1. Add new contact. \n2. Edit existing contact.\n3. Delete Contact \n4. Search By City \n5. Count citywise contacts \n6. Display Alphabetically \n7. Sort By Zipcode \n8. Sort By City \n9. Sort By State \n10. Exit.");
                     int option = int.Parse(Console.ReadLine());
                     switch (option)
                     {
@@ -114,6 +114,15 @@ namespace AddressBook
                             book.AlphabeticallyArrange();
                             break;
                         case 7:
+                            book.SortByPincode();
+                            break;
+                        case 8:
+                            book.SortByCity();
+                            break;
+                        case 9:
+                            book.SortByState();
+                            break;
+                        case 10:
                             loop = 0;
                             break;
                     }
@@ -130,7 +139,6 @@ namespace AddressBook
                     Console.WriteLine(c.FirstName + "\t" + c.LastName + "\t" + c.Address + "\t" + c.City + "\t" + c.State + "\t" + c.ZipCode + "\t" + c.PhoneNumber + "\t" + c.Email);
                 }
             }
-
         }
     }
 }

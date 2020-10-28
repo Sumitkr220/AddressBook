@@ -7,10 +7,10 @@ namespace AddressBook
 {
 	class AddressBook
 	{
-        public HashSet<Contact> People;
+        public List<Contact> People;
         public AddressBook()
         {
-            People = new HashSet<Contact>();
+            People = new List<Contact>();
         }
         public Contact FindContact(string fname)
         {
@@ -64,6 +64,33 @@ namespace AddressBook
             {
                 Console.WriteLine(s);
             }
+        }
+        public void SortByPincode()
+        {
+            People.Sort(new Comparison<Contact>((x, y) => string.Compare(x.ZipCode, y.ZipCode)));
+            foreach (Contact c in People)
+            {
+                Console.WriteLine(c.FirstName + "\t" + c.LastName + "\t" + c.Address + "\t" + c.City + "\t" + c.State + "\t" + c.ZipCode + "\t" + c.PhoneNumber + "\t" + c.Email);
+            }
+
+        }
+        public void SortByCity()
+        {
+            People.Sort(new Comparison<Contact>((x, y) => string.Compare(x.City, y.City)));
+            foreach (Contact c in People)
+            {
+                Console.WriteLine(c.FirstName + "\t" + c.LastName + "\t" + c.Address + "\t" + c.City + "\t" + c.State + "\t" + c.ZipCode + "\t" + c.PhoneNumber + "\t" + c.Email);
+            }
+
+        }
+        public void SortByState()
+        {
+            People.Sort(new Comparison<Contact>((x, y) => string.Compare(x.State, y.State)));
+            foreach (Contact c in People)
+            {
+                Console.WriteLine(c.FirstName + "\t" + c.LastName + "\t" + c.Address + "\t" + c.City + "\t" + c.State + "\t" + c.ZipCode + "\t" + c.PhoneNumber + "\t" + c.Email);
+            }
+
         }
     }
 }
