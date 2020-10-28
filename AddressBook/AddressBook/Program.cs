@@ -7,7 +7,7 @@ namespace AddressBook
 {
 	class Program
 	{
-        public static List<string> data = new List<string>();
+        public static List<Contact> data1 = new List<Contact>();
         static void Main(string[] args)
 		{
             AddressBookBinder binder = new AddressBookBinder();
@@ -134,15 +134,16 @@ namespace AddressBook
             }
             foreach (var key in binder.Binder.Keys)
             {
-                data.Add(key);
                 foreach (Contact c in binder.Binder[key])
                 {
-                    data.Add(c.ToString());
+                    data1.Add(c);
                 }
             }
             Console.WriteLine("Writing contacts in file");
-            ReadWrite.WriteUsingStreamWriter(data);
+            ReadWrite.WriteUsingStreamWriter(data1);
             ReadWrite.ReadFromStreamReader();
+            ReadWrite.ImplementCSVDataHandling();
+            ReadWrite.WriteCSVFile(data1);
         }
     }
 }
