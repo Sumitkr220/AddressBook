@@ -7,109 +7,63 @@ namespace AddressBook
 {
 	class AddressBook
 	{
-		public Dictionary<string, ContactDetails> addBook;
-		public List<ContactDetails> addContact;
-		public int countByCity;
-		public AddressBook()
-		{
-			this.addBook = new Dictionary<string, ContactDetails>();
-			this.addContact = new List<ContactDetails>();
-		}
-		public void setAddressBook(Dictionary<string, ContactDetails> contact)
-		{
-			this.addBook = contact;
-		}
-		public Dictionary<string, ContactDetails> getAddressBook()
-		{
-			return this.addBook;
-		}
-		public void setCountByCity(int countByCity)
+        public HashSet<Contact> People;
+        public AddressBook()
         {
-			this.countByCity = countByCity;
+            People = new HashSet<Contact>();
         }
-		public int getCountByCity()
+        public Contact FindContact(string fname)
         {
-			return this.countByCity;
+            Contact contact = null;
+            foreach (var person in People)
+            {
+                if (person.FirstName.Equals(fname))
+                {
+                    contact = person;
+                    break;
+                }
+            }
+            return contact;
         }
-		public void AddContact(string firstName, ContactDetails contactObj)
-		{
-			try
-			{
-				addBook.Add(firstName, contactObj);
-				addContact.Add(contactObj);
-			}
-			catch
-			{
-				Console.WriteLine("Can not add duplicate name");
-			}
+        public bool AddContact(string FirstName, string LastName, string Address, string City, string State, string ZipCode, string PhoneNumber, string Email)
+        {
+            Contact contact = new Contact(FirstName, LastName, Address, City, State, ZipCode, PhoneNumber, Email);
+            Contact result = FindContact(FirstName);
+            if (result == null)
+            {
+                People.Add(contact);
+                return true;
+            }
+            else
+                return false;
+        }
+        public bool RemoveContact(string name)
+        {
+            Contact c = FindContact(name);
 
-		}
-		public List<ContactDetails> getContact()
-		{
-			return addContact;
-		}
-		public Dictionary<string, ContactDetails> ShowContact()
-		{
-			return addBook;
-		}
-		public string updateContact(string firstName, ContactDetails contact)
-		{
-			int count = 0;
-			foreach (KeyValuePair<string, ContactDetails> item in addBook)
-			{
-				if (item.Key.Equals(firstName))
-				{
-					addBook.Remove(item.Key);
-					count++;
-				}
-			}
-			if (count == 0)
-			{
-				return "no";
-			}
-			else
-			{
-				addBook.Add(firstName, contact);
-				return "yes";
-			}
-		}
-		public bool RemoveContact(string firstName)
-		{
-			ContactDetails contact = new ContactDetails("", "", "", "", "", "", "", "");
-			foreach (KeyValuePair<string, ContactDetails> item in addBook)
-			{
-				if (item.Key.Equals(firstName))
-				{
-					contact = item.Value;
-				}
-			}
-			return addBook.Remove(firstName);
-		}
-
-		public List<String> searchContactByCity(string city)
-		{
-			int count = 0;
-			List<String> list = new List<string>();
-			foreach (ContactDetails contact in addContact.FindAll(e => (e.city.Equals(city))).ToList())
-			{
-				list.Add(contact.firstName);
-				count++;
-			}
-			this.countByCity = count;
-            Console.WriteLine("No of contact found in city is : "+countByCity);
-			return list;
-		}
-		public List<String> searchContactByState(string state)
-		{
-			int count = 0;
-			List<String> list = new List<string>();
-			foreach (ContactDetails contact in addContact.FindAll(e => (e.state.Equals(state))).ToList())
-			{
-				list.Add(contact.firstName);
-				count++;
-			}
-			Console.WriteLine("No of contact found in state is : " + count);
-			return list;
-		}
-	}
+            if (c != null)
+            {
+                People.Remove(c);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void AlphabeticallyArrange()
+        {
+            List<string> alphabeticalList = new List<string>();
+            foreach (Contact c in People)
+            {
+                string sort = c.ToString();
+                alphabeticalList.Add(sort);
+            }
+            alphabeticalList.Sort();
+            foreach (string s in alphabeticalList)
+            {
+                Console.WriteLine(s);
+            }
+        }
+    }
 }
