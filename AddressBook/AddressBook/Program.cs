@@ -7,7 +7,8 @@ namespace AddressBook
 {
 	class Program
 	{
-		static void Main(string[] args)
+        public static List<string> data = new List<string>();
+        static void Main(string[] args)
 		{
             AddressBookBinder binder = new AddressBookBinder();
             Console.WriteLine("Welcome to Address Book Program");
@@ -133,12 +134,15 @@ namespace AddressBook
             }
             foreach (var key in binder.Binder.Keys)
             {
-                Console.WriteLine(key);
+                data.Add(key);
                 foreach (Contact c in binder.Binder[key])
                 {
-                    Console.WriteLine(c.FirstName + "\t" + c.LastName + "\t" + c.Address + "\t" + c.City + "\t" + c.State + "\t" + c.ZipCode + "\t" + c.PhoneNumber + "\t" + c.Email);
+                    data.Add(c.ToString());
                 }
             }
+            Console.WriteLine("Writing contacts in file");
+            ReadWrite.WriteUsingStreamWriter(data);
+            ReadWrite.ReadFromStreamReader();
         }
     }
 }
